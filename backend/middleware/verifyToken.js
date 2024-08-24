@@ -13,12 +13,12 @@ export const verifyToken = async (req, res, next) => {
     if (!decoded) {
       return res
         .status(401)
-        .json({ success: false, message: "Unauthorized - Invalid Token" });
+        .json({ success: false, message: "Unauthorized - Invalid Token!" });
     }
     req.userId = decoded.userId;
     next();
   } catch (error) {
-    console.log("Error in verify token: ", error.message);
+    console.log("Error in verify token: ", error);
     return res
       .status(500)
       .json({ success: false, message: "server error" });
