@@ -9,6 +9,8 @@ import { Toaster } from "react-hot-toast";
 import { useAuthStore } from "./store/authStore";
 import { useEffect } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 //protect routes that require authentication
 const ProtectedRoutes = ({ children }) => {
@@ -37,14 +39,14 @@ const RedirectAuthenticatedUser = ({ children }) => {
 };
 
 function App() {
-  const { isAuthenticated, isCheckingAuth, user, checkAuth } = useAuthStore();
+  const { isCheckingAuth, checkAuth } = useAuthStore();
 
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
 
-  if(isCheckingAuth) {
-    return <LoadingSpinner />
+  if (isCheckingAuth) {
+    return <LoadingSpinner />;
   }
   return (
     <>
@@ -97,6 +99,22 @@ function App() {
             }
           />
           <Route path="/verify-email" element={<EmailVerification />} />
+          <Route
+            path="/forgot-password"
+            element={
+              <RedirectAuthenticatedUser>
+                <ForgotPasswordPage />
+              </RedirectAuthenticatedUser>
+            }
+          />
+          <Route
+            path="/reset-password/:token"
+            element={
+              <RedirectAuthenticatedUser>
+                <ResetPasswordPage />
+              </RedirectAuthenticatedUser>
+            }
+          />
         </Routes>
         <Toaster />
       </div>
