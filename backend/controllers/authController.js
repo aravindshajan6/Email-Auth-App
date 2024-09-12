@@ -110,13 +110,13 @@ export const login = async (req, res) => {
     //check password
     const isPasswordValid = await bcryptjs.compare(password, user.password);
     if (!isPasswordValid) {
-      console.log("isPasswordValid : ", isPasswordValid);
+      // console.log("isPasswordValid : ", isPasswordValid);
       return res.status(400).json({
         success: false,
         message: "Invalid Credentials!",
       });
     }
-    console.log("isPasswordValid : ", isPasswordValid);
+    // console.log("isPasswordValid : ", isPasswordValid);
     generateTokenAndSetCookie(res, user._id);
 
     user.lastLogin = new Date();
@@ -185,7 +185,7 @@ export const forgotPassword = async (req, res) => {
 export const resetPassword = async (req, res) => {
   try {
     const { token } = req.params;
-    console.log(" toooken : ", token);
+    // console.log(" toooken : ", token);
     const { password } = req.body;
     const user = await User.findOne({
       resetPasswordToken: token,

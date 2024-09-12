@@ -52,10 +52,10 @@ export const useAuthStore = create((set) => ({
     } catch (error) {
       console.log(error.message);
       set({
-        error: error.response?.data?.message || "Error logging in",
+        error: error?.response?.data?.message || "Error logging in",
         isLoading: false,
       });
-      throw error;
+      // throw error;
     }
   },
 

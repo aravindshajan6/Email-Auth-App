@@ -1,11 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const FloatingShapes = ({ color, size, top, left, delay }) => {
+const FloatingShapes = ({ color, size, top, left, delay, className }) => {
   return (
     <motion.div
-      className={`absolute rounded-full ${color} ${size} opacity-20 blur-xl  `}
-      style={{ top, left }}
+      className={`${className} absolute rounded-full ${color} ${size} opacity-30 blur-sm  `}
+      style={{ top, left, animationDelay: `${delay}s`, }}
       animate={{
         y: ["0%", "100%", "0%"],
         x: ["0%", "100%", "0%"],
@@ -23,3 +23,6 @@ const FloatingShapes = ({ color, size, top, left, delay }) => {
 };
 
 export default FloatingShapes;
+
+
+
